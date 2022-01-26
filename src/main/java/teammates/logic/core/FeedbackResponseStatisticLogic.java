@@ -1,5 +1,7 @@
 package teammates.logic.core;
 
+import java.util.List;
+
 import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
 import teammates.common.exception.InvalidParametersException;
@@ -9,7 +11,7 @@ import teammates.storage.api.FeedbackResponseStatisticDb;
  * Handles operations related to feedback response statistic objects.
  *
  * @see FeedbackResponseStatisticAttributes
- * @see FeedbackResponseStatistic
+ * @see FeedbackResponseStatisticDb
  */
 public final class FeedbackResponseStatisticLogic {
 
@@ -34,7 +36,7 @@ public final class FeedbackResponseStatisticLogic {
      * @throws InvalidParametersException if the statistic object is not valid
      * @throws EntityAlreadyExistsException if the statistic object already exists in the database.
      */
-    FeedbackResponseStatisticAttributes createAccount(FeedbackResponseStatisticAttributes data)
+    FeedbackResponseStatisticAttributes createFeedbackResponseStatistic(FeedbackResponseStatisticAttributes data)
             throws InvalidParametersException, EntityAlreadyExistsException {
         return feedbackResponseStatisticDb.createEntity(data);
     }
@@ -42,7 +44,14 @@ public final class FeedbackResponseStatisticLogic {
     /**
      * Gets a statistic object.
      */
-    public FeedbackResponseStatisticAttributes getAccount(long begin) {
+    public FeedbackResponseStatisticAttributes getFeedbackResponseStatistic(long begin) {
         return feedbackResponseStatisticDb.getFeedbackResponseStatistic(begin);
+    }
+
+    /**
+     * Gets a list of statistic objects between start time and end time.
+     */
+    public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
+        return feedbackResponseStatisticDb.getFeedbackResponseStatistics(startTime, endTime);
     }
 }

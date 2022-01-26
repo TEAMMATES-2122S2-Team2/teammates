@@ -1,5 +1,7 @@
 package teammates.storage.api;
 
+import java.util.List;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 import com.googlecode.objectify.Key;
@@ -45,6 +47,14 @@ public final class FeedbackResponseStatisticDb extends
 
     private FeedbackResponseStatistic getFeedbackResponseStatisticEntity(long begin) {
         return load().id(begin).now();
+    }
+
+    public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
+        List<FeedbackResponseStatistic> entities = load()
+                .filter("begin >", startTime)
+                .filter("begin <", endTime)
+                .list();
+        return makeAttributes(entities);
     }
 
     @Override

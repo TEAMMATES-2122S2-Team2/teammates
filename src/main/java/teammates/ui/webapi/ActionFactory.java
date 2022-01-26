@@ -81,6 +81,9 @@ public final class ActionFactory {
         map(ResourceURIs.SEARCH_STUDENTS, GET, SearchStudentsAction.class);
         map(ResourceURIs.EMAIL, GET, GenerateEmailAction.class);
 
+        //RESPONSE STATISTICS API
+        map(ResourceURIs.RESPONSE_STATISTICS, GET, GetFeedbackResponseStatisticsAction.class);
+
         map(ResourceURIs.SESSIONS_ONGOING, GET, GetOngoingSessionsAction.class);
         map(ResourceURIs.SESSION_STATS, GET, GetSessionResponseStatsAction.class);
         map(ResourceURIs.SESSION, GET, GetFeedbackSessionAction.class);
