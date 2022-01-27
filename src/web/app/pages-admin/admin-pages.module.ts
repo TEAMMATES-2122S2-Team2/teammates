@@ -51,6 +51,14 @@ const routes: Routes = [
         .then((m: any) => m.LogsPageModule),
   },
   {
+    path: 'responses',
+    loadChildren: () => import('./admin-responses-page/admin-responses-page.module')
+        .then((m: any) => m.AdminResponsesPageModule),
+    data: {
+      pageTitle: 'Feedback Responses',
+    },
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'home',
