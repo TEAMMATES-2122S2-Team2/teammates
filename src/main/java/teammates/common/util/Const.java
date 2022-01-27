@@ -166,6 +166,9 @@ public final class Const {
         public static final String QUERY_LOGS_VERSION = "version";
         public static final String QUERY_LOGS_EXTRA_FILTERS = "extrafilters";
         public static final String QUERY_LOGS_ORDER = "order";
+
+        public static final String QUERY_STATS_STARTTIME = "starttime";
+        public static final String QUERY_STATS_ENDTIME = "endtime";
     }
 
     /**
@@ -324,6 +327,7 @@ public final class Const {
         public static final String QUESTION = URI_PREFIX + "/question";
         public static final String QUESTION_RECIPIENTS = URI_PREFIX + "/question/recipients";
         public static final String RESPONSES = URI_PREFIX + "/responses";
+        public static final String RESPONSE_STATISTICS = URI_PREFIX + "/responses/stats";
         public static final String HAS_RESPONSES = URI_PREFIX + "/hasResponses";
         public static final String JOIN = URI_PREFIX + "/join";
         public static final String JOIN_REMIND = URI_PREFIX + "/join/remind";
@@ -358,6 +362,8 @@ public final class Const {
                 URI_PREFIX + "/feedbackSessionClosingReminders";
         public static final String AUTOMATED_FEEDBACK_PUBLISHED_REMINDERS =
                 URI_PREFIX + "/feedbackSessionPublishedReminders";
+        public static final String AUTOMATED_FEEDBACK_STATISTIC_COLLECTION =
+                URI_PREFIX + "/feedbackResponseStatisticCollection";
     }
 
     /**

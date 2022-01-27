@@ -13,7 +13,9 @@ import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.CourseAttributes;
 import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseAttributes;
+import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseCommentAttributes;
+import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
@@ -29,7 +31,9 @@ import teammates.logic.core.CoursesLogic;
 import teammates.logic.core.DataBundleLogic;
 import teammates.logic.core.FeedbackQuestionsLogic;
 import teammates.logic.core.FeedbackResponseCommentsLogic;
+import teammates.logic.core.FeedbackResponseStatisticLogic;
 import teammates.logic.core.FeedbackResponsesLogic;
+import teammates.logic.core.FeedbackResponseStatisticLogic;
 import teammates.logic.core.FeedbackSessionsLogic;
 import teammates.logic.core.InstructorsLogic;
 import teammates.logic.core.ProfilesLogic;
@@ -52,6 +56,7 @@ public class Logic {
     final FeedbackQuestionsLogic feedbackQuestionsLogic = FeedbackQuestionsLogic.inst();
     final FeedbackResponsesLogic feedbackResponsesLogic = FeedbackResponsesLogic.inst();
     final FeedbackResponseCommentsLogic feedbackResponseCommentsLogic = FeedbackResponseCommentsLogic.inst();
+    final FeedbackResponseStatisticLogic feedbackResponseStatisticLogic = FeedbackResponseStatisticLogic.inst();
     final ProfilesLogic profilesLogic = ProfilesLogic.inst();
     final DataBundleLogic dataBundleLogic = DataBundleLogic.inst();
 
@@ -1205,6 +1210,10 @@ public class Logic {
         return feedbackResponsesLogic.getFeedbackResponse(feedbackResponseId);
     }
 
+    public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
+        return feedbackResponseStatisticLogic.getFeedbackResponseStatistics(startTime, endTime);
+    }
+
     /**
      * Creates a feedback response.
      *
@@ -1318,6 +1327,20 @@ public class Logic {
      */
     public void deleteFeedbackResponseComment(long commentId) {
         feedbackResponseCommentsLogic.deleteFeedbackResponseComment(commentId);
+    }
+
+    /**
+     * Create a feedback response statistic object.
+     *
+     * @param feedbackResponseStatistic feedback response statistic object
+     * @return the created object
+     * @throws InvalidParametersException if attributes to update are not valid
+     * @throws EntityAlreadyExistsException if the object with same begin time already exist
+     */
+    public FeedbackResponseStatisticAttributes createFeedbackResponseStatistic(
+            FeedbackResponseStatisticAttributes feedbackResponseStatistic)
+            throws InvalidParametersException, EntityAlreadyExistsException {
+        return feedbackResponseStatisticLogic.createFeedbackResponseStatistic(feedbackResponseStatistic);
     }
 
     /**
