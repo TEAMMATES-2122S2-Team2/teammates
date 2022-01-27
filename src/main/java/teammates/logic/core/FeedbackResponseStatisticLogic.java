@@ -36,7 +36,7 @@ public final class FeedbackResponseStatisticLogic {
      * @throws InvalidParametersException if the statistic object is not valid
      * @throws EntityAlreadyExistsException if the statistic object already exists in the database.
      */
-    FeedbackResponseStatisticAttributes createFeedbackResponseStatistic(FeedbackResponseStatisticAttributes data)
+    public FeedbackResponseStatisticAttributes createFeedbackResponseStatistic(FeedbackResponseStatisticAttributes data)
             throws InvalidParametersException, EntityAlreadyExistsException {
         return feedbackResponseStatisticDb.createEntity(data);
     }

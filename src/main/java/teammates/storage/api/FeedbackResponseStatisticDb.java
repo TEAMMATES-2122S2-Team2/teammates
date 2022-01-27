@@ -11,7 +11,7 @@ import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttribu
 import teammates.storage.entity.FeedbackResponseStatistic;
 
 /**
- * Handles CRUD operations for accounts.
+ * Handles CRUD operations for feedback response statistic objects.
  *
  * @see FeedbackResponseStatistic
  * @see FeedbackResponseStatisticAttributes

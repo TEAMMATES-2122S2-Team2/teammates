@@ -17,7 +17,8 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
     private long amount;
     private Instant createdAt;
 
-    private FeedbackResponseStatisticAttributes(long begin) {
+    // TODO: use a builder instead of this constructor
+    public FeedbackResponseStatisticAttributes(long begin) {
         this.begin = begin;
     }
 

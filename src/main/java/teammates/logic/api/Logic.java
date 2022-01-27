@@ -15,6 +15,7 @@ import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseCommentAttributes;
+import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
 import teammates.common.datatransfer.attributes.InstructorAttributes;
 import teammates.common.datatransfer.attributes.StudentAttributes;
@@ -30,6 +31,7 @@ import teammates.logic.core.CoursesLogic;
 import teammates.logic.core.DataBundleLogic;
 import teammates.logic.core.FeedbackQuestionsLogic;
 import teammates.logic.core.FeedbackResponseCommentsLogic;
+import teammates.logic.core.FeedbackResponseStatisticLogic;
 import teammates.logic.core.FeedbackResponsesLogic;
 import teammates.logic.core.FeedbackResponseStatisticLogic;
 import teammates.logic.core.FeedbackSessionsLogic;
@@ -1325,6 +1327,20 @@ public class Logic {
      */
     public void deleteFeedbackResponseComment(long commentId) {
         feedbackResponseCommentsLogic.deleteFeedbackResponseComment(commentId);
+    }
+
+    /**
+     * Create a feedback response statistic object.
+     *
+     * @param feedbackResponseStatistic feedback response statistic object
+     * @return the created object
+     * @throws InvalidParametersException if attributes to update are not valid
+     * @throws EntityAlreadyExistsException if the object with same begin time already exist
+     */
+    public FeedbackResponseStatisticAttributes createFeedbackResponseStatistic(
+            FeedbackResponseStatisticAttributes feedbackResponseStatistic)
+            throws InvalidParametersException, EntityAlreadyExistsException {
+        return feedbackResponseStatisticLogic.createFeedbackResponseStatistic(feedbackResponseStatistic);
     }
 
     /**
