@@ -13,7 +13,6 @@ import teammates.common.datatransfer.attributes.AccountAttributes;
 import teammates.common.datatransfer.attributes.CourseAttributes;
 import teammates.common.datatransfer.attributes.FeedbackQuestionAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseAttributes;
-import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseCommentAttributes;
 import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.datatransfer.attributes.FeedbackSessionAttributes;
@@ -33,7 +32,6 @@ import teammates.logic.core.FeedbackQuestionsLogic;
 import teammates.logic.core.FeedbackResponseCommentsLogic;
 import teammates.logic.core.FeedbackResponseStatisticLogic;
 import teammates.logic.core.FeedbackResponsesLogic;
-import teammates.logic.core.FeedbackResponseStatisticLogic;
 import teammates.logic.core.FeedbackSessionsLogic;
 import teammates.logic.core.InstructorsLogic;
 import teammates.logic.core.ProfilesLogic;
@@ -1180,6 +1178,14 @@ public class Logic {
 
         return feedbackResponsesLogic.getSessionResultsForUser(
                 feedbackSessionName, courseId, userEmail, isInstructor, questionId);
+    }
+
+    /**
+     * Gets a list of feedback responses by the range of creation times.
+     */
+    public List<FeedbackResponseAttributes> getFeedbackResponsesByTimeRange(
+            Instant startTime, Instant endTime) {
+        return feedbackResponsesLogic.getFeedbackResponsesByTimeRange(startTime, endTime);
     }
 
     /**

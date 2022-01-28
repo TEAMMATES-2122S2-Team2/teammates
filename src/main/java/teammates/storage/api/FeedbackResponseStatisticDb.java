@@ -1,8 +1,8 @@
 package teammates.storage.api;
 
-import java.util.List;
-
 import static com.googlecode.objectify.ObjectifyService.ofy;
+
+import java.util.List;
 
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.cmd.LoadType;
@@ -49,6 +49,9 @@ public final class FeedbackResponseStatisticDb extends
         return load().id(begin).now();
     }
 
+    /**
+     * Gets a list of statistic objects between start time and end time.
+     */
     public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
         List<FeedbackResponseStatistic> entities = load()
                 .filter("begin >", startTime)

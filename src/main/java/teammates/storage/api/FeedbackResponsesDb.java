@@ -2,6 +2,7 @@ package teammates.storage.api;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -89,6 +90,23 @@ public final class FeedbackResponsesDb extends EntitiesDb<FeedbackResponse, Feed
                 getFeedbackResponseEntity(FeedbackResponse.generateId(feedbackQuestionId, giverEmail, receiverEmail));
 
         return makeAttributesOrNull(fr);
+    }
+
+    /**
+     * Gets a list of feedback responses by the range of creation times.
+     * @param startTime timestamp of the begin time
+     * @param endTime timestamp of the end time
+     * @return a list of response entities
+     */
+    public List<FeedbackResponseAttributes> getFeedbackResponsesByTimeRange(
+            Instant startTime, Instant endTime) {
+        List<FeedbackResponseAttributes> objects = new ArrayList<>();
+        // TODO: Is it possible to make it using key-only query?
+        load().filter("createdAt >=", startTime)
+                .filter("createdAt <", endTime)
+                .list()
+                .forEach(entity -> objects.add(FeedbackResponseAttributes.valueOf(entity)));
+        return objects;
     }
 
     /**
