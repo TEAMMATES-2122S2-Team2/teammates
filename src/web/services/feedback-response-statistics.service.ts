@@ -15,12 +15,12 @@ export class FeedbackResponseStatisticsService {
   constructor(private httpRequestService: HttpRequestService) { }
 
   getFeedbackResponseStatistics(queryParams: {
-    startTime: string,
-    endTime: string,
+    startTime: number,
+    endTime: number,
   }): Observable<FeedbackResponseStatistics> {
     const paramMap: Record<string, string> = {
-      starttime: queryParams.startTime,
-      endtime: queryParams.endTime,
+      starttime: `${queryParams.startTime}`,
+      endtime: `${queryParams.endTime}`,
     };
 
     return this.httpRequestService.get(ResourceEndpoints.RESPONSE_STATISTICS, paramMap);
