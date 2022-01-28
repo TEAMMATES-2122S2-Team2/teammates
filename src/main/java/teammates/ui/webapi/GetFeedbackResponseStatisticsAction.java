@@ -1,11 +1,11 @@
 package teammates.ui.webapi;
 
+import java.time.Instant;
+import java.util.List;
+
 import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.util.Const;
 import teammates.ui.output.FeedbackResponseStatisticsData;
-
-import java.time.Instant;
-import java.util.List;
 
 /**
  * Gets feedback response statistics for a specified time period.
@@ -61,7 +61,7 @@ class GetFeedbackResponseStatisticsAction extends Action {
         List<FeedbackResponseStatisticAttributes> feedbackResponseStatistics =
                 logic.getFeedbackResponseStatistics(startTime, endTime);
 
-        FeedbackResponseStatisticsData output = new FeedbackResponseStatisticsData((feedbackResponseStatistics));
+        FeedbackResponseStatisticsData output = new FeedbackResponseStatisticsData(feedbackResponseStatistics);
         return new JsonResult(output);
     }
 }
