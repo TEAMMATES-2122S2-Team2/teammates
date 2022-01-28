@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { AdminResponsesPageComponent } from './admin-responses-page.component';
-import { RouterModule, Routes } from "@angular/router";
 import { ResponsesLineChartComponent } from './responses-line-chart/responses-line-chart.component';
 
 const routes: Routes = [
@@ -11,6 +11,9 @@ const routes: Routes = [
   },
 ];
 
+/**
+ * Module for admin feedback responses statistics page.
+ */
 @NgModule({
   declarations: [
     AdminResponsesPageComponent,
@@ -22,6 +25,6 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-  ]
+  ],
 })
 export class AdminResponsesPageModule { }

@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpRequestService } from "./http-request.service";
-import { Observable } from "rxjs";
-import { FeedbackResponseStatistics } from "../types/api-output";
-import { ResourceEndpoints } from "../types/api-const";
+import { Observable } from 'rxjs';
+import { ResourceEndpoints } from '../types/api-const';
+import { FeedbackResponseStatistics } from '../types/api-output';
+import { HttpRequestService } from './http-request.service';
 
+/**
+ * Handles feedback response statistics provision.
+ */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FeedbackResponseStatisticsService {
 

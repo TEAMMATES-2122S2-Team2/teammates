@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnChanges, SimpleChanges } from '@angular/core';
-import * as d3 from "d3";
+import * as d3 from 'd3';
 
 /**
  * Line chart for the feedback responses.
@@ -9,12 +9,12 @@ import * as d3 from "d3";
 @Component({
   selector: 'tm-responses-line-chart',
   templateUrl: './responses-line-chart.component.html',
-  styleUrls: ['./responses-line-chart.component.scss']
+  styleUrls: ['./responses-line-chart.component.scss'],
 })
 export class ResponsesLineChartComponent implements OnChanges {
 
   @Input()
-  public data!: { value: number, date: string }[];
+  data!: { value: number, date: string }[];
 
   private width: number = 700;
   private height: number = 700;
@@ -29,9 +29,8 @@ export class ResponsesLineChartComponent implements OnChanges {
 
   constructor(public chartElem: ElementRef) { }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
     if (changes.hasOwnProperty('data') && this.data) {
-      console.log(this.data)
       this.initializeChart();
       this.drawChart();
 
@@ -48,7 +47,7 @@ export class ResponsesLineChartComponent implements OnChanges {
 
     this.svgInner = this.svg
       .append('g')
-      .style('transform', 'translate(' + this.margin + 'px, ' + this.margin + 'px)');
+      .style('transform', `translate(${this.margin}px, ${this.margin}px)`);
 
     this.yScale = d3
       .scaleLinear()
@@ -63,12 +62,12 @@ export class ResponsesLineChartComponent implements OnChanges {
     this.yAxis = this.svgInner
       .append('g')
       .attr('id', 'y-axis')
-      .style('transform', 'translate(' + this.margin + 'px, 0)');
+      .style('transform', `translate(${this.margin}px, 0)`);
 
     this.xAxis = this.svgInner
       .append('g')
       .attr('id', 'x-axis')
-      .style('transform', 'translate(0, ' + (this.height - 2 * this.margin) + 'px)');
+      .style('transform', `translate(0, ${this.height - 2 * this.margin}px)`);
 
     this.lineGroup = this.svgInner
       .append('g')
@@ -85,19 +84,19 @@ export class ResponsesLineChartComponent implements OnChanges {
 
     this.xScale.range([this.margin, this.width - 2 * this.margin]);
 
-    const xAxis = d3
+    const xAxis: any = d3
       .axisBottom(this.xScale)
       .ticks(10)
       .tickFormat(d3.timeFormat('%m / %Y'));
 
     this.xAxis.call(xAxis);
 
-    const yAxis = d3
+    const yAxis: any = d3
       .axisLeft(this.yScale);
 
     this.yAxis.call(yAxis);
 
-    const line = d3
+    const line: any = d3
       .line()
       .x((d: number[]) => d[0])
       .y((d: number[]) => d[1])
