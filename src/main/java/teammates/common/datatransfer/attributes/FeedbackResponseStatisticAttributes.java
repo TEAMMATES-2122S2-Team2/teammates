@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import teammates.common.util.JsonUtils;
 import teammates.storage.entity.FeedbackResponseStatistic;
 
 /**
@@ -87,7 +86,8 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
 
     @Override
     public String toString() {
-        return JsonUtils.toJson(this, FeedbackResponseStatistic.class);
+        return "FeedbackResponseStatisticAttributes [begin="
+                + begin + ", amount=" + amount + "]";
     }
 
     @Override

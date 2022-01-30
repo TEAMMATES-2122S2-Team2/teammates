@@ -53,9 +53,11 @@ public final class FeedbackResponseStatisticDb extends
      * Gets a list of statistic objects between start time and end time.
      */
     public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
+        Key<FeedbackResponseStatistic> startTimeKey = Key.create(FeedbackResponseStatistic.class, startTime);
+        Key<FeedbackResponseStatistic> endTimeKey = Key.create(FeedbackResponseStatistic.class, endTime);
         List<FeedbackResponseStatistic> entities = load()
-                .filter("begin >", startTime)
-                .filter("begin <", endTime)
+                .filterKey(">=", startTimeKey)
+                .filterKey("<", endTimeKey)
                 .list();
         return makeAttributes(entities);
     }

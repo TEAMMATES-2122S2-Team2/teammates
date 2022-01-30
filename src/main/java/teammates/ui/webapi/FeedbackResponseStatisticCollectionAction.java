@@ -29,7 +29,7 @@ public class FeedbackResponseStatisticCollectionAction extends AdminOnlyAction {
                 logic.getFeedbackResponsesByTimeRange(startTime, endTime);
 
         FeedbackResponseStatisticAttributes attributes =
-                new FeedbackResponseStatisticAttributes(startTime.toEpochMilli() / 1000);
+                new FeedbackResponseStatisticAttributes(startTime.toEpochMilli());
         attributes.setAmount(feedbacks.size());
 
         try {
