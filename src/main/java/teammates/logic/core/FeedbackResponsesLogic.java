@@ -107,9 +107,8 @@ public final class FeedbackResponsesLogic {
     /**
      * Gets a list of feedback responses by the range of creation times.
      */
-    public List<FeedbackResponseAttributes> getFeedbackResponsesByTimeRange(
-            Instant startTime, Instant endTime) {
-        return frDb.getFeedbackResponsesByTimeRange(startTime, endTime);
+    public int getNumFeedbackResponsesByTimeRange(Instant startTime, Instant endTime) {
+        return frDb.getNumFeedbackResponsesByTimeRange(startTime, endTime);
     }
 
     /**

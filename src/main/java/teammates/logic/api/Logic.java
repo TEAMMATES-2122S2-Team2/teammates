@@ -1183,9 +1183,8 @@ public class Logic {
     /**
      * Gets a list of feedback responses by the range of creation times.
      */
-    public List<FeedbackResponseAttributes> getFeedbackResponsesByTimeRange(
-            Instant startTime, Instant endTime) {
-        return feedbackResponsesLogic.getFeedbackResponsesByTimeRange(startTime, endTime);
+    public int getNumFeedbackResponsesByTimeRange(Instant startTime, Instant endTime) {
+        return feedbackResponsesLogic.getNumFeedbackResponsesByTimeRange(startTime, endTime);
     }
 
     /**

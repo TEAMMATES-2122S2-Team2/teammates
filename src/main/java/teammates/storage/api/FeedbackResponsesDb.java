@@ -93,20 +93,17 @@ public final class FeedbackResponsesDb extends EntitiesDb<FeedbackResponse, Feed
     }
 
     /**
-     * Gets a list of feedback responses by the range of creation times.
-     * @param startTime timestamp of the begin time
+     * Gets the number of feedback responses created within a specified time range.
+     * @param startTime timestamp of the start time
      * @param endTime timestamp of the end time
-     * @return a list of response entities
+     * @return number of feedback responses with creation time within given time range
      */
-    public List<FeedbackResponseAttributes> getFeedbackResponsesByTimeRange(
-            Instant startTime, Instant endTime) {
-        List<FeedbackResponseAttributes> objects = new ArrayList<>();
-        // TODO: Is it possible to make it using key-only query?
-        load().filter("createdAt >=", startTime)
+    public int getNumFeedbackResponsesByTimeRange(Instant startTime, Instant endTime) {
+        return load().filter("createdAt >=", startTime)
                 .filter("createdAt <", endTime)
+                .keys()
                 .list()
-                .forEach(entity -> objects.add(FeedbackResponseAttributes.valueOf(entity)));
-        return objects;
+                .size();
     }
 
     /**
