@@ -39,6 +39,9 @@ export class ResponsesLineChartComponent implements OnChanges {
   }
 
   private initializeChart(): void {
+    if (this.svg) {
+      d3.select('svg').remove();
+    }
     this.svg = d3
       .select(this.chartElem.nativeElement)
       .select('.line-chart')
