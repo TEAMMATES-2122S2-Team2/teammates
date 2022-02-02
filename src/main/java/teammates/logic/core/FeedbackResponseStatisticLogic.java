@@ -49,6 +49,13 @@ public final class FeedbackResponseStatisticLogic {
     }
 
     /**
+     * Gets the key of the latest statistic entity.
+     */
+    public long getLatestFeedbackResponseStatisticEntityId() {
+        return feedbackResponseStatisticDb.getLatestFeedbackResponseStatisticEntityId();
+    }
+
+    /**
      * Gets a list of statistic objects between start time and end time.
      */
     public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {

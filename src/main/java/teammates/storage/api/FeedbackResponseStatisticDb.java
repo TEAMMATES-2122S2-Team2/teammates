@@ -50,6 +50,18 @@ public final class FeedbackResponseStatisticDb extends
     }
 
     /**
+     * Gets the key of the latest statistic entity.
+     */
+    public long getLatestFeedbackResponseStatisticEntityId() {
+        List<Key<FeedbackResponseStatistic>> keys = load().order("-__key__").limit(1).keys().list();
+        if (keys.isEmpty()) {
+            return 0;
+        } else {
+            return keys.get(0).getId();
+        }
+    }
+
+    /**
      * Gets a list of statistic objects between start time and end time.
      */
     public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {

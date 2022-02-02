@@ -1219,6 +1219,10 @@ public class Logic {
         return feedbackResponseStatisticLogic.getFeedbackResponseStatistics(startTime, endTime);
     }
 
+    public long getLatestFeedbackResponseStatisticEntityId() {
+        return feedbackResponseStatisticLogic.getLatestFeedbackResponseStatisticEntityId();
+    }
+
     /**
      * Creates a feedback response.
      *

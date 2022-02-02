@@ -1,7 +1,6 @@
 package teammates.ui.webapi;
 
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 
 import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
 import teammates.common.exception.EntityAlreadyExistsException;
@@ -16,15 +15,15 @@ public class FeedbackResponseStatisticCollectionAction extends AdminOnlyAction {
 
     @Override
     public JsonResult execute() {
-        // Query the number of feedback submissions within the past one hour
+        // Query the number of feedback submissions since the last collection
         // Truncates (rounds down) to the nearest hour
-        Instant endTime = Instant.now().truncatedTo(ChronoUnit.HOURS);
-        Instant startTime = endTime.minus(1, ChronoUnit.HOURS);
+        Instant endTime = Instant.now();
+        Instant startTime = Instant.ofEpochMilli(logic.getLatestFeedbackResponseStatisticEntityId());
 
         int numFeedbacks = logic.getNumFeedbackResponsesByTimeRange(startTime, endTime);
 
         FeedbackResponseStatisticAttributes attributes =
-                new FeedbackResponseStatisticAttributes(startTime.toEpochMilli());
+                new FeedbackResponseStatisticAttributes(endTime.toEpochMilli());
         attributes.setAmount(numFeedbacks);
 
         try {
