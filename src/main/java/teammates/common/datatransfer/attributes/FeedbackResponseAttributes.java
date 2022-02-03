@@ -102,6 +102,10 @@ public class FeedbackResponseAttributes extends EntityAttributes<FeedbackRespons
         return createdAt;
     }
 
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Instant getUpdatedAt() {
         return updatedAt;
     }
@@ -169,9 +173,13 @@ public class FeedbackResponseAttributes extends EntityAttributes<FeedbackRespons
 
     @Override
     public FeedbackResponse toEntity() {
-        return new FeedbackResponse(feedbackSessionName, courseId,
+        FeedbackResponse entity = new FeedbackResponse(feedbackSessionName, courseId,
                 feedbackQuestionId, getFeedbackQuestionType(),
                 giver, giverSection, recipient, recipientSection, getSerializedFeedbackResponseDetail());
+        if (createdAt != null) {
+            entity.setCreatedAt(createdAt);
+        }
+        return entity;
     }
 
     @Override

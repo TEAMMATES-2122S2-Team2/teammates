@@ -1184,6 +1184,8 @@ public class Logic {
      * Gets a list of feedback responses by the range of creation times.
      */
     public int getNumFeedbackResponsesByTimeRange(Instant startTime, Instant endTime) {
+        assert startTime.toEpochMilli() < endTime.toEpochMilli();
+
         return feedbackResponsesLogic.getNumFeedbackResponsesByTimeRange(startTime, endTime);
     }
 
@@ -1216,7 +1218,15 @@ public class Logic {
     }
 
     public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
+        assert startTime < endTime;
+
         return feedbackResponseStatisticLogic.getFeedbackResponseStatistics(startTime, endTime);
+    }
+
+    public List<Long> getFeedbackResponseStatisticsKeys(long startTime, long endTime) {
+        assert startTime < endTime;
+
+        return feedbackResponseStatisticLogic.getFeedbackResponseStatisticsKeys(startTime, endTime);
     }
 
     public long getLatestFeedbackResponseStatisticEntityId() {
@@ -1350,6 +1360,15 @@ public class Logic {
             FeedbackResponseStatisticAttributes feedbackResponseStatistic)
             throws InvalidParametersException, EntityAlreadyExistsException {
         return feedbackResponseStatisticLogic.createFeedbackResponseStatistic(feedbackResponseStatistic);
+    }
+
+    /**
+     * Updates a statistic object by overwriting the existing one, if necessary.
+     */
+    public FeedbackResponseStatisticAttributes updateFeedbackResponseStatistic(
+            FeedbackResponseStatisticAttributes feedbackResponseStatistic)
+            throws InvalidParametersException {
+        return feedbackResponseStatisticLogic.updateFeedbackResponseStatistic(feedbackResponseStatistic);
     }
 
     /**

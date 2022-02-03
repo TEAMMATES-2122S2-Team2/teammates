@@ -2,6 +2,7 @@ package teammates.storage.api;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.objectify.Key;
@@ -72,6 +73,25 @@ public final class FeedbackResponseStatisticDb extends
                 .filterKey("<", endTimeKey)
                 .list();
         return makeAttributes(entities);
+    }
+
+    /**
+     * Gets a list of statistic objects' keys between start time and end time.
+     */
+    public List<Long> getFeedbackResponseStatisticsKeys(long startTime, long endTime) {
+        Key<FeedbackResponseStatistic> startTimeKey = Key.create(FeedbackResponseStatistic.class, startTime);
+        Key<FeedbackResponseStatistic> endTimeKey = Key.create(FeedbackResponseStatistic.class, endTime);
+        List<Long> result = new ArrayList<>();
+        load()
+                .order("__key__")
+                .filterKey(">=", startTimeKey)
+                .filterKey("<", endTimeKey)
+                .keys()
+                .list()
+                .forEach(key -> {
+                    result.add(key.getId());
+                });
+        return result;
     }
 
     @Override

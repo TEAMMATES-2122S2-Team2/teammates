@@ -42,6 +42,14 @@ public final class FeedbackResponseStatisticLogic {
     }
 
     /**
+     * Updates a statistic object by overwriting the existing one, if necessary.
+     */
+    public FeedbackResponseStatisticAttributes updateFeedbackResponseStatistic(FeedbackResponseStatisticAttributes data)
+            throws InvalidParametersException {
+        return feedbackResponseStatisticDb.putEntity(data);
+    }
+
+    /**
      * Gets a statistic object.
      */
     public FeedbackResponseStatisticAttributes getFeedbackResponseStatistic(long begin) {
@@ -60,5 +68,12 @@ public final class FeedbackResponseStatisticLogic {
      */
     public List<FeedbackResponseStatisticAttributes> getFeedbackResponseStatistics(long startTime, long endTime) {
         return feedbackResponseStatisticDb.getFeedbackResponseStatistics(startTime, endTime);
+    }
+
+    /**
+     * Gets a list of statistic objects' keys between start time and end time.
+     */
+    public List<Long> getFeedbackResponseStatisticsKeys(long startTime, long endTime) {
+        return feedbackResponseStatisticDb.getFeedbackResponseStatisticsKeys(startTime, endTime);
     }
 }
