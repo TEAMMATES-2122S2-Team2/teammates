@@ -23,8 +23,8 @@
                 </div>
                 <div class="input-group">
                     <div class="col-md-6 input-group">
-                        <input id="admin-responses-to-datepicker" type="text" class="form-control" ngbDatepicker [minDate]="earliestSearchDate" [maxDate]="dateToday" [(ngModel)]="formModel.feedbackResponsesDateTo" #logsFromDp="ngbDatepicker"/>
-                        <button class="btn btn-light" (click)="logsFromDp.toggle()" type="button">
+                        <input id="admin-responses-to-datepicker" type="text" class="form-control" ngbDatepicker [minDate]="earliestSearchDate" [maxDate]="dateToday" [(ngModel)]="formModel.feedbackResponsesDateTo" #logsToDp="ngbDatepicker"/>
+                        <button class="btn btn-light" (click)="logsToDp.toggle()" type="button">
                             <i class="fas fa-calendar-alt"></i>
                         </button>
                     </div>
