@@ -90,7 +90,7 @@ export class ResponsesLineChartComponent implements OnChanges {
     const xAxis: any = d3
       .axisBottom(this.xScale)
       .ticks(10)
-      .tickFormat(d3.timeFormat('%m / %Y'));
+      .tickFormat(d3.timeFormat('%b %d, %H:%M'));
 
     this.xAxis.call(xAxis);
 
