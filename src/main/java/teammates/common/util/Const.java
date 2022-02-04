@@ -328,6 +328,7 @@ public final class Const {
         public static final String QUESTION_RECIPIENTS = URI_PREFIX + "/question/recipients";
         public static final String RESPONSES = URI_PREFIX + "/responses";
         public static final String RESPONSE_STATISTICS = URI_PREFIX + "/responses/stats";
+        public static final String RESPONSE_STATISTICS_DATE_RANGE = URI_PREFIX + "/responses/stats/range";
         public static final String HAS_RESPONSES = URI_PREFIX + "/hasResponses";
         public static final String JOIN = URI_PREFIX + "/join";
         public static final String JOIN_REMIND = URI_PREFIX + "/join/remind";

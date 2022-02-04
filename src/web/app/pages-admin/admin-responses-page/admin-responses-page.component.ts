@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackResponseStatisticsService } from '../../../services/feedback-response-statistics.service';
 import { TimezoneService } from '../../../services/timezone.service';
-import { FeedbackResponseStatistics } from '../../../types/api-output';
+import { FeedbackResponseStatistics, FeedbackResponseStatisticsDateRange } from '../../../types/api-output';
 import { DateFormat } from '../../components/datepicker/datepicker.component';
 import { TimeFormat } from '../../components/timepicker/timepicker.component';
 
@@ -29,6 +29,8 @@ export class AdminResponsesPageComponent implements OnInit {
     feedbackResponsesTimeTo: { hour: 0, minute: 0 },
   };
   dateToday: DateFormat = { year: 0, month: 0, day: 0 };
+  firstDate: string = '';
+  latestDate: string = '';
   earliestSearchDate: DateFormat = { year: 0, month: 0, day: 0 };
   queryParams: { startTime: number, endTime: number } = { startTime: 0, endTime: 0 };
   hasQueried: boolean = false;
@@ -47,6 +49,12 @@ export class AdminResponsesPageComponent implements OnInit {
 
     // Start with logs from the past hour
     const fromDate: Date = new Date(now.getTime() - 60 * 60 * 1000);
+
+    this.feedbackResponseStatisticsService.getFeedbackResponseStatisticsDataRange()
+    .subscribe((dateRange: FeedbackResponseStatisticsDateRange) => {
+      this.firstDate = new Date(dateRange.first).toString();
+      this.latestDate = new Date(dateRange.latest).toString();
+    });
 
     this.formModel.feedbackResponsesDateFrom = {
       year: fromDate.getFullYear(),

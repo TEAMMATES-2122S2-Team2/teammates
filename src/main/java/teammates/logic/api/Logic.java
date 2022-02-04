@@ -1234,6 +1234,10 @@ public class Logic {
         return feedbackResponseStatisticLogic.getLatestFeedbackResponseStatisticEntityId();
     }
 
+    public long getFirstFeedbackResponseStatisticEntityId() {
+        return feedbackResponseStatisticLogic.getFirstFeedbackResponseStatisticEntityId();
+    }
+
     /**
      * Creates a feedback response.
      *

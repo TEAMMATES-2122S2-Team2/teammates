@@ -83,6 +83,7 @@ public final class ActionFactory {
 
         //RESPONSE STATISTICS API
         map(ResourceURIs.RESPONSE_STATISTICS, GET, GetFeedbackResponseStatisticsAction.class);
+        map(ResourceURIs.RESPONSE_STATISTICS_DATE_RANGE, GET, GetFeedbackResponseStatisticsDateRangeAction.class);
 
         map(ResourceURIs.SESSIONS_ONGOING, GET, GetOngoingSessionsAction.class);
         map(ResourceURIs.SESSION_STATS, GET, GetSessionResponseStatsAction.class);

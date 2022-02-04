@@ -45,8 +45,8 @@ export class ResponsesLineChartComponent implements OnChanges {
     if (this.svg) {
       d3.select('svg').remove();
     }
-    const startTime = new Date(this.timeRange.startTime);
-    const endTime = new Date(this.timeRange.endTime);
+    const startTime: Date = new Date(this.timeRange.startTime);
+    const endTime: Date = new Date(this.timeRange.endTime);
     this.svg = d3
       .select(this.chartElem.nativeElement)
       .select('.line-chart')

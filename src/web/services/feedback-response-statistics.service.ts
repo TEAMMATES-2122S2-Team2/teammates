@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResourceEndpoints } from '../types/api-const';
-import { FeedbackResponseStatistics } from '../types/api-output';
+import { FeedbackResponseStatistics, FeedbackResponseStatisticsDateRange } from '../types/api-output';
 import { HttpRequestService } from './http-request.service';
 
 /**
@@ -24,5 +24,9 @@ export class FeedbackResponseStatisticsService {
     };
 
     return this.httpRequestService.get(ResourceEndpoints.RESPONSE_STATISTICS, paramMap);
+  }
+
+  getFeedbackResponseStatisticsDataRange(): Observable<FeedbackResponseStatisticsDateRange> {
+    return this.httpRequestService.get(ResourceEndpoints.RESPONSE_STATISTICS_DATE_RANGE);
   }
 }
