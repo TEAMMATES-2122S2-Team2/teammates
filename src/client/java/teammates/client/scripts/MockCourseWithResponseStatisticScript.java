@@ -278,9 +278,10 @@ public final class MockCourseWithResponseStatisticScript extends DatastoreClient
                 int numFeedbacks = logic.getNumFeedbackResponsesByTimeRange(startTime, endTime);
 
                 FeedbackResponseStatisticAttributes attributes =
-                        new FeedbackResponseStatisticAttributes(endTime.toEpochMilli());
+                            FeedbackResponseStatisticAttributes.builder(endTime.toEpochMilli())
+                            .withAmount(numFeedbacks)
+                            .build();
                 attributes.setCreatedAt(endTime);
-                attributes.setAmount(numFeedbacks);
 
                 try {
                     logic.updateFeedbackResponseStatistic(attributes);

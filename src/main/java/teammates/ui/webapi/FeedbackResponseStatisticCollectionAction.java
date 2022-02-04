@@ -22,9 +22,9 @@ public class FeedbackResponseStatisticCollectionAction extends AdminOnlyAction {
 
         int numFeedbacks = logic.getNumFeedbackResponsesByTimeRange(startTime, endTime);
 
-        FeedbackResponseStatisticAttributes attributes =
-                new FeedbackResponseStatisticAttributes(endTime.toEpochMilli());
-        attributes.setAmount(numFeedbacks);
+        FeedbackResponseStatisticAttributes attributes = FeedbackResponseStatisticAttributes.builder(endTime.toEpochMilli())
+                .withAmount(numFeedbacks)
+                .build();
 
         try {
             logic.createFeedbackResponseStatistic(attributes);

@@ -16,8 +16,7 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
     private long amount;
     private Instant createdAt;
 
-    // TODO: use a builder instead of this constructor
-    public FeedbackResponseStatisticAttributes(long begin) {
+    private FeedbackResponseStatisticAttributes(long begin) {
         this.begin = begin;
     }
 
@@ -115,5 +114,126 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
     @Override
     public void sanitizeForSaving() {
         // TODO: Nothing to sanitize
+    }
+
+    /**
+     * Returns a builder for {@link FeedbackResponseAttributes}.
+     */
+    public static Builder builder(long begin) {
+        return new Builder(begin);
+    }
+
+    /**
+     * Updates with {@link UpdateOptions}.
+     */
+    public void update(UpdateOptions updateOptions) {
+        updateOptions.amountOption.ifPresent(s -> amount = s);
+    }
+
+    /**
+     * Returns a {@link UpdateOptions.Builder} to build {@link UpdateOptions} for a response.
+     */
+    public static UpdateOptions.Builder updateOptionsBuilder(long begin) {
+        return new UpdateOptions.Builder(begin);
+    }
+
+    /**
+     * A builder for {@link FeedbackResponseStatisticAttributes}.
+     */
+    public static class Builder extends BasicBuilder<FeedbackResponseStatisticAttributes, Builder> {
+
+        private FeedbackResponseStatisticAttributes frsa;
+
+        private Builder(long begin) {
+            super(new UpdateOptions(begin));
+            thisBuilder = this;
+            assert begin >= 0;
+            frsa = new FeedbackResponseStatisticAttributes(begin);
+        }
+
+        public Builder withAmount(long amount) {
+            assert amount >= 0;
+            frsa.amount = amount;
+
+            return this;
+        }
+
+        @Override
+        public FeedbackResponseStatisticAttributes build() {
+            frsa.update(updateOptions);
+
+            return frsa;
+        }
+    }
+
+    /**
+     * Helper class to specific the fields to update in {@link FeedbackResponseStatisticAttributes}.
+     */
+    public static class UpdateOptions {
+        private long begin;
+
+        private UpdateOption<Long> amountOption = UpdateOption.empty();
+
+        private UpdateOptions(long begin) {
+            assert begin >= 0;
+
+            this.begin = begin;
+        }
+
+        public long getBegin() {
+            return begin;
+        }
+
+        @Override
+        public String toString() {
+            return "FeedbackResponseStatisticAttributes.UpdateOptions ["
+                    + "begin = " + begin
+                    + ", amount = " + amountOption
+                    + "]";
+        }
+
+        /**
+         * Builder class to build {@link UpdateOptions}.
+         */
+        public static class Builder extends BasicBuilder<UpdateOptions, Builder> {
+
+            private Builder(long begin) {
+                super(new UpdateOptions(begin));
+                thisBuilder = this;
+            }
+
+            public Builder withAmount(long amount) {
+                assert amount >= 0;
+
+                updateOptions.amountOption = UpdateOption.of(amount);
+                return thisBuilder;
+            }
+
+            @Override
+            public UpdateOptions build() {
+                return updateOptions;
+            }
+
+        }
+
+    }
+
+    /**
+     * Basic builder to build {@link FeedbackResponseStatisticAttributes} related classes.
+     *
+     * @param <T> type to be built
+     * @param <B> type of the builder
+     */
+    private abstract static class BasicBuilder<T, B extends BasicBuilder<T, B>> {
+
+        UpdateOptions updateOptions;
+        B thisBuilder;
+
+        BasicBuilder(UpdateOptions updateOptions) {
+            this.updateOptions = updateOptions;
+        }
+
+        public abstract T build();
+
     }
 }
