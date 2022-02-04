@@ -16,6 +16,9 @@ export class ResponsesLineChartComponent implements OnChanges {
   @Input()
   data!: { value: number, date: string }[];
 
+  @Input()
+  timeRange: { startTime: number, endTime: number } = { startTime: 0, endTime: 0 };
+
   private width: number = 700;
   private height: number = 700;
   private margin: number = 50;
@@ -30,7 +33,7 @@ export class ResponsesLineChartComponent implements OnChanges {
   constructor(public chartElem: ElementRef) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.hasOwnProperty('data') && this.data) {
+    if (changes.hasOwnProperty('data') && this.data && this.timeRange) {
       this.initializeChart();
       this.drawChart();
 
@@ -42,6 +45,8 @@ export class ResponsesLineChartComponent implements OnChanges {
     if (this.svg) {
       d3.select('svg').remove();
     }
+    const startTime = new Date(this.timeRange.startTime);
+    const endTime = new Date(this.timeRange.endTime);
     this.svg = d3
       .select(this.chartElem.nativeElement)
       .select('.line-chart')
@@ -60,7 +65,7 @@ export class ResponsesLineChartComponent implements OnChanges {
 
     this.xScale = d3
       .scaleTime()
-      .domain(d3.extent(this.data, (d: {value: number, date: string}) => new Date(d.date)));
+      .domain([startTime, endTime]);
 
     this.yAxis = this.svgInner
       .append('g')
