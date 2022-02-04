@@ -12,7 +12,7 @@ public class FeedbackResponseStatisticData extends ApiOutput {
     private final Long numResponses;
 
     public FeedbackResponseStatisticData(FeedbackResponseStatisticAttributes feedbackResponseStatisticAttributes) {
-        this.timestamp = feedbackResponseStatisticAttributes.getCreatedAt().toEpochMilli();
+        this.timestamp = feedbackResponseStatisticAttributes.getBegin();
         this.numResponses = feedbackResponseStatisticAttributes.getAmount();
     }
 

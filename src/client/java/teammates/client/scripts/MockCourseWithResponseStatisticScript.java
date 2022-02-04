@@ -279,6 +279,7 @@ public final class MockCourseWithResponseStatisticScript extends DatastoreClient
 
                 FeedbackResponseStatisticAttributes attributes =
                         new FeedbackResponseStatisticAttributes(endTime.toEpochMilli());
+                attributes.setCreatedAt(endTime);
                 attributes.setAmount(numFeedbacks);
 
                 try {
