@@ -18,6 +18,7 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
 
     private FeedbackResponseStatisticAttributes(long begin) {
         this.begin = begin;
+        this.createdAt = Instant.now();
     }
 
     /**
@@ -74,13 +75,17 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
 
     @Override
     public List<String> getInvalidityInfo() {
-        // TODO: Nothing to check
+        // Nothing to check
         return new ArrayList<>();
     }
 
     @Override
     public FeedbackResponseStatistic toEntity() {
-        return new FeedbackResponseStatistic(begin, amount);
+        FeedbackResponseStatistic frs = new FeedbackResponseStatistic(begin, amount);
+        if (createdAt != null) {
+            frs.setCreatedAt(createdAt);
+        }
+        return frs;
     }
 
     @Override
@@ -113,7 +118,7 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
 
     @Override
     public void sanitizeForSaving() {
-        // TODO: Nothing to sanitize
+        // Nothing to sanitize
     }
 
     /**
@@ -147,7 +152,8 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
         private Builder(long begin) {
             super(new UpdateOptions(begin));
             thisBuilder = this;
-            assert begin >= 0;
+            assert begin > 0;
+            assert begin <= Instant.now().toEpochMilli();
             frsa = new FeedbackResponseStatisticAttributes(begin);
         }
 
@@ -175,7 +181,7 @@ public final class FeedbackResponseStatisticAttributes extends EntityAttributes<
         private UpdateOption<Long> amountOption = UpdateOption.empty();
 
         private UpdateOptions(long begin) {
-            assert begin >= 0;
+            assert begin > 0;
 
             this.begin = begin;
         }

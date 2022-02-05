@@ -129,7 +129,8 @@ public class GetActionClassesActionTest extends BaseActionTest<GetActionClassesA
                 InstructorSearchIndexingWorkerAction.class,
                 StudentSearchIndexingWorkerAction.class,
                 FeedbackResponseStatisticCollectionAction.class,
-                GetFeedbackResponseStatisticsAction.class
+                GetFeedbackResponseStatisticsAction.class,
+                GetFeedbackResponseStatisticsDateRangeAction.class
         );
         List<String> expectedActionClassesNames = expectedActionClasses.stream()
                 .map(Class::getSimpleName)

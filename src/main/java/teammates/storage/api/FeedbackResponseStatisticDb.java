@@ -34,6 +34,7 @@ public final class FeedbackResponseStatisticDb extends
      * Gets a statistic object.
      */
     public FeedbackResponseStatisticAttributes getFeedbackResponseStatistic(long begin) {
+        assert begin > 0;
         return makeAttributesOrNull(getFeedbackResponseStatisticEntity(begin));
     }
 
@@ -43,6 +44,7 @@ public final class FeedbackResponseStatisticDb extends
      * <p>Fails silently if there is no such statistic object.
      */
     public void deleteFeedbackResponseStatistic(long begin) {
+        assert begin > 0;
         deleteEntity(Key.create(FeedbackResponseStatistic.class, begin));
     }
 
