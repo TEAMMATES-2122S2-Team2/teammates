@@ -49,3 +49,7 @@ indexes:
     name: sentOpeningSoonEmail
   - direction: asc
     name: startTime
+- kind: FeedbackResponseStatistic
+  properties:
+  - direction: desc
+    name: __key__

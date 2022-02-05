@@ -84,6 +84,10 @@ public final class ActionFactory {
         map(ResourceURIs.SEARCH_STUDENTS, GET, SearchStudentsAction.class);
         map(ResourceURIs.EMAIL, GET, GenerateEmailAction.class);
 
+        //RESPONSE STATISTICS API
+        map(ResourceURIs.RESPONSE_STATISTICS, GET, GetFeedbackResponseStatisticsAction.class);
+        map(ResourceURIs.RESPONSE_STATISTICS_DATE_RANGE, GET, GetFeedbackResponseStatisticsDateRangeAction.class);
+
         map(ResourceURIs.SESSIONS_ONGOING, GET, GetOngoingSessionsAction.class);
         map(ResourceURIs.SESSION_STATS, GET, GetSessionResponseStatsAction.class);
         map(ResourceURIs.SESSION, GET, GetFeedbackSessionAction.class);
@@ -137,6 +141,7 @@ public final class ActionFactory {
         map(CronJobURIs.AUTOMATED_FEEDBACK_PUBLISHED_REMINDERS, GET, FeedbackSessionPublishedRemindersAction.class);
         map(CronJobURIs.AUTOMATED_FEEDBACK_OPENING_SOON_REMINDERS, GET,
                 FeedbackSessionOpeningSoonRemindersAction.class);
+        map(CronJobURIs.AUTOMATED_FEEDBACK_STATISTIC_COLLECTION, GET, FeedbackResponseStatisticCollectionAction.class);
 
         // Task queue workers; use POST request
         // Reference: https://cloud.google.com/tasks/docs/creating-appengine-tasks

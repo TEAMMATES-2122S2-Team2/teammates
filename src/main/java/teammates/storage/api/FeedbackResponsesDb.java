@@ -2,6 +2,7 @@ package teammates.storage.api;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -89,6 +90,20 @@ public final class FeedbackResponsesDb extends EntitiesDb<FeedbackResponse, Feed
                 getFeedbackResponseEntity(FeedbackResponse.generateId(feedbackQuestionId, giverEmail, receiverEmail));
 
         return makeAttributesOrNull(fr);
+    }
+
+    /**
+     * Gets the number of feedback responses created within a specified time range.
+     * @param startTime timestamp of the start time
+     * @param endTime timestamp of the end time
+     * @return number of feedback responses with creation time within given time range
+     */
+    public int getNumFeedbackResponsesByTimeRange(Instant startTime, Instant endTime) {
+        return load().filter("createdAt >=", startTime)
+                .filter("createdAt <", endTime)
+                .keys()
+                .list()
+                .size();
     }
 
     /**

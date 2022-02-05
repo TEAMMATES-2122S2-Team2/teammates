@@ -41,6 +41,10 @@ export class AdminPageComponent implements OnInit {
       url: '/web/admin/logs',
       display: 'Logs',
     },
+    {
+      url: '/web/admin/responses',
+      display: 'Feedback Responses',
+    },
   ];
   isFetchingAuthDetails: boolean = false;
 

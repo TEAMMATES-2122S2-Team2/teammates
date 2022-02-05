@@ -1,5 +1,6 @@
 package teammates.logic.core;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -98,9 +99,16 @@ public final class FeedbackResponsesLogic {
     /**
      * Gets all responses for a session.
      */
-    List<FeedbackResponseAttributes> getFeedbackResponsesForSession(
+    public List<FeedbackResponseAttributes> getFeedbackResponsesForSession(
             String feedbackSessionName, String courseId) {
         return frDb.getFeedbackResponsesForSession(feedbackSessionName, courseId);
+    }
+
+    /**
+     * Gets a list of feedback responses by the range of creation times.
+     */
+    public int getNumFeedbackResponsesByTimeRange(Instant startTime, Instant endTime) {
+        return frDb.getNumFeedbackResponsesByTimeRange(startTime, endTime);
     }
 
     /**
