@@ -124,9 +124,10 @@ export class ResponsesLineChartComponent implements OnChanges {
       .data(this.data)
       .enter()
       .append("circle")								
-      .attr("r", 4)		
+      .attr("r", 5)		
       .attr("cx", function(d:any) { return obj.xScale(new Date(d.date)); })		 
       .attr("cy", function(d:any) { return obj.yScale(d.value); })
+      .attr("opacity", "0")
       .on("mouseover", (d: any) => {
         div.transition()
           .duration(200)
