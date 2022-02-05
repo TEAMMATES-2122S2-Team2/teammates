@@ -1,6 +1,5 @@
 package teammates.ui.webapi;
 
-import java.time.Instant;
 import java.util.List;
 
 import teammates.common.datatransfer.attributes.FeedbackResponseStatisticAttributes;
@@ -27,35 +26,18 @@ class GetFeedbackResponseStatisticsAction extends Action {
     @Override
     public JsonResult execute() {
         String startTimeString = getNonNullRequestParamValue(Const.ParamsNames.QUERY_STATS_STARTTIME);
-        long startTime;
-        try {
-            startTime = Long.parseLong(startTimeString);
-        } catch (NumberFormatException e) {
-            throw new InvalidHttpParameterException("Invalid startTime parameter", e);
-        }
-        try {
-            // test for bounds
-            Instant.ofEpochMilli(startTime).minus(Const.FEEDBACK_SESSIONS_SEARCH_WINDOW).toEpochMilli();
-        } catch (ArithmeticException e) {
-            throw new InvalidHttpParameterException("Invalid startTime parameter", e);
-        }
-
         String endTimeString = getNonNullRequestParamValue(Const.ParamsNames.QUERY_STATS_ENDTIME);
+        long startTime;
         long endTime;
         try {
+            startTime = Long.parseLong(startTimeString);
             endTime = Long.parseLong(endTimeString);
         } catch (NumberFormatException e) {
-            throw new InvalidHttpParameterException("Invalid endTime parameter", e);
-        }
-        try {
-            // test for bounds
-            Instant.ofEpochMilli(endTime).plus(Const.FEEDBACK_SESSIONS_SEARCH_WINDOW).toEpochMilli();
-        } catch (ArithmeticException e) {
-            throw new InvalidHttpParameterException("Invalid endTime parameter", e);
+            throw new InvalidHttpParameterException("Invalid startTime or endTine parameter", e);
         }
 
         if (startTime > endTime) {
-            throw new InvalidHttpParameterException("The filter range is not valid. End time should be after start time.");
+            throw new InvalidHttpParameterException("The end time should be after the start time.");
         }
 
         List<FeedbackResponseStatisticAttributes> feedbackResponseStatistics =

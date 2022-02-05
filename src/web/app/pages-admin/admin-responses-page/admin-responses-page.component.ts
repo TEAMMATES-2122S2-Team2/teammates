@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FeedbackResponseStatisticsService } from '../../../services/feedback-response-statistics.service';
+import { StatusMessageService } from '../../../services/status-message.service';
 import { TimezoneService } from '../../../services/timezone.service';
 import { FeedbackResponseStatistics, FeedbackResponseStatisticsDateRange } from '../../../types/api-output';
 import { DateFormat } from '../../components/datepicker/datepicker.component';
 import { TimeFormat } from '../../components/timepicker/timepicker.component';
+import { ErrorMessageOutput } from '../../error-message-output';
 
 interface FeedbackResponsesStatisticsFormModel {
   feedbackResponsesDateFrom: DateFormat;
@@ -29,16 +31,18 @@ export class AdminResponsesPageComponent implements OnInit {
     feedbackResponsesTimeTo: { hour: 0, minute: 0 },
   };
   dateToday: DateFormat = { year: 0, month: 0, day: 0 };
-  firstDate: string = '';
-  latestDate: string = '';
+  firstDate: Date = new Date();
+  latestDate: Date = new Date();
   earliestSearchDate: DateFormat = { year: 0, month: 0, day: 0 };
   queryParams: { startTime: number, endTime: number } = { startTime: 0, endTime: 0 };
   hasQueried: boolean = false;
+  isEarlierThanFirstDate: boolean = false;
   data: { value: number, date: string }[] = [];
 
   constructor(
     private feedbackResponseStatisticsService: FeedbackResponseStatisticsService,
     private timezoneService: TimezoneService,
+    private statusMessageService: StatusMessageService,
   ) {}
 
   ngOnInit(): void {
@@ -47,13 +51,13 @@ export class AdminResponsesPageComponent implements OnInit {
     this.dateToday.month = now.getMonth() + 1;
     this.dateToday.day = now.getDate();
 
-    // Start with logs from the past hour
-    const fromDate: Date = new Date(now.getTime() - 60 * 60 * 1000);
+    // Start with logs from the past day
+    const fromDate: Date = new Date(now.getTime() - 24 * 60 * 60 * 1000);
 
     this.feedbackResponseStatisticsService.getFeedbackResponseStatisticsDataRange()
     .subscribe((dateRange: FeedbackResponseStatisticsDateRange) => {
-      this.firstDate = new Date(dateRange.first).toString();
-      this.latestDate = new Date(dateRange.latest).toString();
+      this.firstDate = new Date(dateRange.first);
+      this.latestDate = new Date(dateRange.latest);
     });
 
     this.formModel.feedbackResponsesDateFrom = {
@@ -78,6 +82,7 @@ export class AdminResponsesPageComponent implements OnInit {
     this.feedbackResponseStatisticsService.getFeedbackResponseStatistics(
       this.queryParams,
     ).subscribe((feedbackResponseStatistics: FeedbackResponseStatistics) => {
+      this.isEarlierThanFirstDate = false;
       this.data = [];
       for (const feedbackResponseStatistic of feedbackResponseStatistics.responses) {
         this.data.push({
@@ -85,8 +90,11 @@ export class AdminResponsesPageComponent implements OnInit {
           date: new Date(feedbackResponseStatistic.timestamp).toISOString(),
         });
       }
+      if (timestampFrom < this.firstDate.getTime()) {
+        this.isEarlierThanFirstDate = true;
+      }
       this.hasQueried = true;
-    });
+    }, (e: ErrorMessageOutput) => this.statusMessageService.showErrorToast(e.error.message));
   }
 
 }

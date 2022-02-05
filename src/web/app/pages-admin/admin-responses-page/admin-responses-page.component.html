@@ -1,5 +1,5 @@
-<p>Data available from: {{ firstDate }}</p>
-<p>Last updated on: {{ latestDate }}</p>
+<p>Data available from: {{ firstDate | date:'long' }}</p>
+<p>Last updated on: {{ latestDate | date:'long' }}</p>
 <div class="card bg-form no-border">
     <div class="card-body">
         <div class="row form-group">
@@ -39,6 +39,12 @@
                 <button id="query-button" class="float-right btn btn-primary" (click)="getFeedbackResponsesStatistics()">Query</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div *ngIf="hasQueried && isEarlierThanFirstDate">
+    <div class="alert alert-danger" role="alert">
+        Note: There are no statistics collected for responses created earlier than {{ firstDate | date:'long' }}.
     </div>
 </div>
 
