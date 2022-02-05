@@ -116,6 +116,30 @@ export class ResponsesLineChartComponent implements OnChanges {
     ]);
 
     this.lineGroup.attr('d', line(points));
+
+    var div = d3.select("div.tooltip");
+    var obj = this;
+    this.svgInner
+      .selectAll("dot")
+      .data(this.data)
+      .enter()
+      .append("circle")								
+      .attr("r", 4)		
+      .attr("cx", function(d:any) { return obj.xScale(new Date(d.date)); })		 
+      .attr("cy", function(d:any) { return obj.yScale(d.value); })
+      .on("mouseover", (d: any) => {
+        div.transition()
+          .duration(200)
+          .style("opacity", .9);
+        div.html("Time: " + new Date(d.date).toString() + "<br/>New Responses Count: " + d.value)
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 32) + "px");
+        })
+      .on("mouseout", () => {		
+        div.transition()		
+          .duration(500)		
+          .style("opacity", 0);	
+      });
   }
 
 }
